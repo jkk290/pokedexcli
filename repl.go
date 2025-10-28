@@ -14,6 +14,7 @@ func startRepl() {
 	config := Config{
 		Next:     "",
 		Previous: "",
+		pokeDex:  make(map[string]pokeapi.Pokemon),
 		Client:   pokeapi.NewClient(30),
 	}
 
@@ -64,10 +65,16 @@ type Config struct {
 	Next     string
 	Previous string
 	Client   *pokeapi.Client
+	pokeDex  map[string]pokeapi.Pokemon
 }
 
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
+		"catch": {
+			name:        "catch",
+			description: "Attempts to catch pokemon and add to pokedex if successful",
+			callback:    commandCatch,
+		},
 		"help": {
 			name:        "help",
 			description: "Displays a help message",

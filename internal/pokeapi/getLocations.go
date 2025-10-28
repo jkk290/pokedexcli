@@ -21,6 +21,10 @@ func (c *Client) GetLocations(url string) (Location, error) {
 	}
 	defer res.Body.Close()
 
+	if res.StatusCode == 404 {
+		return Location{}, fmt.Errorf("location not found")
+	}
+
 	resBodyBytes, err := io.ReadAll(res.Body)
 	if err != nil {
 		return Location{}, fmt.Errorf("error converting response body to bytes: %v", err)
