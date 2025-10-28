@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/jkk290/pokedexcli/internal/pokeapi"
 )
 
 func startRepl() {
@@ -12,6 +14,7 @@ func startRepl() {
 	config := Config{
 		Next:     "",
 		Previous: "",
+		Client:   pokeapi.NewClient(30),
 	}
 
 	for {
@@ -54,6 +57,7 @@ type cliCommand struct {
 type Config struct {
 	Next     string
 	Previous string
+	Client   *pokeapi.Client
 }
 
 func getCommands() map[string]cliCommand {

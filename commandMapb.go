@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/jkk290/pokedexcli/internal/pokeapi"
 )
 
 func commandMapb(config *Config) error {
@@ -14,7 +12,7 @@ func commandMapb(config *Config) error {
 
 	url := config.Previous
 
-	locations, err := pokeapi.GetLocations(url)
+	locations, err := config.Client.GetLocations(url)
 	if err != nil {
 		return fmt.Errorf("error with map command: %v", err)
 	}
