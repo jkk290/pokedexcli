@@ -105,5 +105,10 @@ func getCommands() map[string]cliCommand {
 			description: "Displays previous list of 20 locations",
 			callback:    commandMapb,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Displays caught pokemon from pokedex",
+			callback:    commandPokedex,
+		},
 	}
 }
