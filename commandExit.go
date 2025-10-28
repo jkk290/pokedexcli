@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func commandExit(config *Config) error {
+func commandExit(str string, config *Config) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return fmt.Errorf("Unable to exit program, try ctrl+c instead")

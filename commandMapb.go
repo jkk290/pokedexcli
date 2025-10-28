@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandMapb(config *Config) error {
+func commandMapb(str string, config *Config) error {
 	if config.Previous == "" {
 		fmt.Println("No previous locations to display")
 		return nil

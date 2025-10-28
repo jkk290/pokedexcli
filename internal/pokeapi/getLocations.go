@@ -4,23 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"net/http"
-	"time"
-
-	"github.com/jkk290/pokedexcli/internal/pokecache"
 )
-
-type Client struct {
-	http  *http.Client
-	cache *pokecache.Cache
-}
-
-func NewClient(interval time.Duration) *Client {
-	return &Client{
-		http:  &http.Client{},
-		cache: pokecache.NewCache(interval),
-	}
-}
 
 func (c *Client) GetLocations(url string) (Location, error) {
 	if cachedData, exists := c.cache.Get(url); exists {
@@ -28,7 +12,6 @@ func (c *Client) GetLocations(url string) (Location, error) {
 		if err := json.Unmarshal(cachedData, &locations); err != nil {
 			return Location{}, fmt.Errorf("error converting json from cache: %v", err)
 		}
-		fmt.Println("Successfully read from cache")
 		return locations, nil
 	}
 

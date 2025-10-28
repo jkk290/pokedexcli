@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandMap(config *Config) error {
+func commandMap(str string, config *Config) error {
 	var url string
 
 	if config.Next == "" {

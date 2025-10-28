@@ -30,7 +30,13 @@ func startRepl() {
 
 		runCmd, exists := getCommands()[userCmd]
 		if exists {
-			err := runCmd.callback(&config)
+			var strArg string
+			if len(cleanedInput) > 1 {
+				strArg = cleanedInput[1]
+			} else {
+				strArg = ""
+			}
+			err := runCmd.callback(strArg, &config)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -51,7 +57,7 @@ func cleanInput(text string) []string {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(config *Config) error
+	callback    func(string, *Config) error
 }
 
 type Config struct {
@@ -71,6 +77,11 @@ func getCommands() map[string]cliCommand {
 			name:        "exit",
 			description: "Exit the Pokedex",
 			callback:    commandExit,
+		},
+		"explore": {
+			name:        "explore",
+			description: "Displays pokemon found in given area",
+			callback:    commandExplore,
 		},
 		"map": {
 			name:        "map",
